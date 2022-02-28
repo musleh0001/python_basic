@@ -4,14 +4,42 @@ class Employee:
     def __init__(self, first, last, pay):
         self.first = first
         self.last = last
-        self.email = f"{first.lower()}.{last.lower()}@company.com"
         self.pay = pay
 
+    @property
+    def email(self):
+        return f"{self.first.lower()}.{self.last.lower()}@email.com"
+
+    @property
     def fullname(self):
         return f"{self.first} {self.last}"
 
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(" ")
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        print("Delete Name!")
+        self.first = None
+        self.last = None
+
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amt)
+
+    def __add__(self, other):
+        return self.pay + other.pay
+
+    def __len__(self):
+        return len(self.fullname)
+
+    def __repr__(self):
+        return f"Employee('{self.first}', '{self.last}', {self.pay})"
+
+    def __str__(self):
+        return f"{self.fullname} - {self.email}"
 
 
 class Developer(Employee):
@@ -41,11 +69,16 @@ class Manager(Employee):
     def print_emps(self):
         print(f"Employee{'s' if len(self.employees) > 1 else ''} list:")
         for emp in self.employees:
-            print(f"\t--> {emp.fullname()}")
+            print(f"\t--> {emp.fullname}")
 
 
 dev_1 = Developer("Musleh", "Khan", 60000, "Python")
 dev_2 = Developer("Test", "User", 50000, "JavaScript")
+
+print(dev_1.__repr__())
+print(dev_1)
+print(dev_1 + dev_2)
+print(len(dev_1))
 
 # print(dev_1.prog_lang)
 # print(dev_2.email)
