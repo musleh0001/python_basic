@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+Sample-Dir-One/
+Sample-Dir-Two/
+sample.txt
