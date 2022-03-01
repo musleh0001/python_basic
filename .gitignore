@@ -131,3 +131,5 @@ dmypy.json
 Sample-Dir-One/
 Sample-Dir-Two/
 sample.txt
+
+*.db 
